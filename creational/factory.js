@@ -1,47 +1,45 @@
 function Developer(name) {
     this.name = name,
-    this.type = 'Developer'
+        this.type = 'Developer'
 }
 
 function TeamLead(name) {
     this.name = name,
-    this.type = 'Team Lead'
+        this.type = 'Team Lead'
 }
 
 class Architect {
     constructor(name) {
         this.name = name,
-        this.type = 'Architect'
+            this.type = 'Technical Architect'
     }
 }
 
-function EmployeeFactory(type, name) {
-    this.create = () => {
-        switch(type) {
-            case 1: 
+function EmployeeFactory() {
+    this.create = (type, name) => {
+        switch (type) {
+            case 1:
                 return new Developer(name)
-                case 2: 
+            case 2:
                 return new TeamLead(name)
-                case 3: 
+            case 3:
                 return new Architect(name)
-                default:
-                    return Developer(name)
-        } 
+            default:
+                return Developer(name)
+        }
     }
 }
 
-const dev = new EmployeeFactory(1, 'Rajan').create();
-const lead = new EmployeeFactory(2, 'VLS');
-const reactArchitect = new EmployeeFactory(3, 'Subramaniam').create();
+const employee = new EmployeeFactory();
 
+function displayEmployee() {
+    console.log(`My name is ${this.name} and I'm a ${this.type}`)
+}
 
 
 let employees = [];
+employees.push(employee.create(1, 'Rajan'));
+employees.push(employee.create(2, 'subvl'));
+employees.push(employee.create(3, 'Subramaniam'));
 
-employees.push(dev);
-employees.push(lead.create());
-employees.push(reactArchitect);
-
-
-const names = employees.map(emp => emp.name);
-console.log(names)
+employees.forEach(employee => displayEmployee.call(employee));
